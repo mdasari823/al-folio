@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.23.1/babel.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/d3/4.6.0/d3.min.js"></script>
+    <script src="http://unpkg.com/d3-radial-axis@1.5/dist/d3-radial-axis.min.js"></script>
+    <script src="https://npmcdn.com/d3fc-rebind@4.0.1/build/d3fc-rebind.js"></script>
+    <script src="https://npmcdn.com/d3fc-data-join@2.0.0/build/d3fc-data-join.js"></script>
+    <script src="https://npmcdn.com/d3fc-label-layout@4.0.0/build/d3fc-label-layout.js"></script>
+</head>
+<style>
+body {
+    text-align: center;
+    font-family: Sans-serif;
+    margin: 0;
+}
+.background {
+    stroke-width: 0;
+    fill: Lavender;
+    fill-opacity: 0.3;
+}
+.axis .domain, .axis .tick line {
+    stroke-width: 2px;
+    stroke: lightgrey;
+}
+.axis .tick:first-of-type {
+    display: none; // hide 0 tick
+}
+.axis .tick text {
+    font-size: 14px;
+    fill: blue;
+}
+.chart rect {
+    fill: transparent;
+}
+.label {
+    font-size: 18pt;
+}
+</style>
+
+<body>
+    <svg id="canvas"></svg>
+<script>
+// Add your deadlines here.
+// type: "[grant, conf, conf_venue][1, 2]"
+var data = [
+{name: "SIGCOMM",        date: new Date("Jan 25 2017"), type: "conf1"},
+{name: "SIGMETRICS",            date: new Date("Feb 15 2017"), type: "conf1"},
+{name: "ATC",            date: new Date("Feb 10 2017"), type: "conf2"},
+{name: "MOBICOM",            date: new Date("Mar 20 2017"), type: "conf1"},
+{name: "IMC",   date: new Date("May 20 2017"), type: "conf2"},
+{name: "CoNEXT",            date: new Date("Jun 18 2017"), type: "conf2"},
+{name: "INFOCOM",            date: new Date("Jul 15 2017"), type: "conf2"},
+{name: "SIGMETRICS",            date: new Date("Jul 25 2017"), type: "conf1"},
+{name: "Hotnets",             date: new Date("Aug 10 2017"), type: "conf2"},
+{name: "NSDI",            date: new Date("Sep 10 2017"), type: "conf1"},
+{name: "HOTMOBILE",    date: new Date("Oct 17 2017"), type: "conf2"},
+{name: "PAM",            date: new Date("Oct 18 2017"), type: "conf2"},
+{name: "SIGMETRICS",           date: new Date("Oct 23 2017"), type: "conf1"},
+{name: "WWW",         date: new Date("Oct 31 2017"), type: "conf2"},
+{name: "MMsys",         date: new Date("Nov 30 2017"), type: "conf2"},
+{name: "MOBISYS",         date: new Date("Dec 9 2017"), type: "conf1"},
+{name: "ICDCS",         date: new Date("Dec 15 2017"), type: "conf1"},
+{name: "MOBIHOC",             date: new Date("Dec 19 2017"),  type: "conf2"},
+{name: "Multimedia",             date: new Date("Apr 13 2017"), type: "conf1"},
+{name: "UbiComp",         date: new Date("Nov 15 2017"), type: "conf1"},
+{name: "UbiComp",         date: new Date("Feb 16 2017"), type: "conf1"},
+{name: "UbiComp",         date: new Date("May 15 2017"), type: "conf1"},
+{name: "UbiComp",         date: new Date("Aug 15 2017"), type: "conf1"},
+{name: "SIGGRAPH",        date: new Date("Jan 16 2017"), type: "conf1"},
+];
+// determine how far apart the labels will be (also from their dots)
+const labelPadding = 8;
+// the radii for label types: [grant, conf, conf_venue]
+const typeRadiiOffset = [75, 0, 150];
+// the radius of the circle (from the window size)
+const r = Math.min(window.innerWidth, window.innerHeight) / 2 - 100;
+// the scale is linear chronological, mapped to [0, 2pi]
+const yearScale = d3.scaleTime()
+                  .domain([new Date(2017, 0, 0), new Date(2017, 11, 30)])
+                  .range([0, 2 * Math.PI]);
+// Size canvas
+const svg = d3.select('#canvas')
+    .attr('width', r * 2 + 300)  // extra width space
+    .attr('height', r * 2 + 100)
+    .attr('viewBox', `${-r - 150} ${-r - 150} ${r*2 + 300} ${r*2 + 300}`)
+// add chart group
+var chart = svg.append('g')
+               .classed("chart", true)
+               .attr("transform","translate(0, 50)");
+// Add background
+chart.append('circle').classed('background', true)
+    .attr('cx', 0)
+    .attr('cy', 0)
+    .attr('r', r)
+// Set axis at (r - 100)
+var radialAxis = d3.axisRadialInner(yearScale.copy(), r - 100)
+                   .ticks(12)
+                   .tickSize(-170) //push the ticks way out
+                   .tickPadding(-190);
+// draw radial axis
+chart.append('g')
+     .classed('axis', true)
+     .call(radialAxis);
+/********** Dont worry about this stuff ************/
+/* It's to make sure labels won't overlap.         */
+var textLabel = fc.layoutTextLabel()
+                  .padding(labelPadding)
+                  .value(function(d) { return d.name; });
+var strategy = fc.layoutAnnealing();
+var labels = fc.layoutLabel(strategy)
+               .size(function(_, i, g) {
+                   // measure the label and add the required padding
+                   var textSize = d3.select(g[i])
+                       .select('text')
+                       .node()
+                       .getBBox();
+                   return [textSize.width  + labelPadding * 2,
+                           textSize.height + labelPadding * 2];
+               })
+               .position(function(d) {
+                  var a = yearScale(d.date);
+                  // this puts the papers, grants and venues on different radii
+                  const rad = d.type.startsWith("conf_venue") ? r - typeRadiiOffset[2] :
+                              d.type.startsWith("grant")      ? r - typeRadiiOffset[0] :
+                                                                r - typeRadiiOffset[1] ;
+                  return [ Math.sin(a) * rad, -Math.cos(a) * rad];
+               })
+               .component(textLabel);
+/**************** Resume worrying ****************/
+// render non-overlapping labels!
+chart.datum(data)
+     .call(labels);
+// style the labels according to their type
+chart.selectAll(".label")
+     .style("fill-opacity", (d)=>d.type.endsWith("1") ? 1      : 0.65    )
+     .style("font-weight",  (d)=>d.type.endsWith("1") ? "bold" : "normal")
+     .style("font-size",    (d)=>d.type.endsWith("1") ? "18pt" : "16pt"  )
+     .style("fill",         (d)=>d.type.startsWith("conf_venue") ? "green" :
+                                 d.type.startsWith("grant")      ? "black" :
+                                                                  "red"   );
+// Add title
+svg.append("text")
+     .text("Circle of Conference Deadlines")
+     .attr("x", 0)
+     .attr("y", -r - 50)
+     .attr("text-anchor", "middle")
+     .style("font-size", "36pt");
+// Add reader
+
+</script>
+
+</body>
+</html>

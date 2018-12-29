@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+        <title>File Download</title>
+        <meta http-equiv="REFRESH">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+
+<script>
+	$(document).ready(function() {
+		console.log("hi");
+	});
+
+	$("p").on("click", function(){
+		setTimeout(doAjax, 500);
+	});
+
+function doAjax() {
+    $.ajax({
+        url: 'http://www3.cs.stonybrook.edu/~mdasari/docs/myfile.txt',
+        type:'post',
+        beforeSend: function (xhr) {
+            xhr.start = new Date().getTime();
+        },
+        data: {
+            html: 'fooooo  bar'
+        }
+        
+    }).done(function (res, status, xhr) {
+            var end = new Date().getTime();
+            var elapsed = end - xhr.start;
+            $('body').append('<p>Elapsed =' + elapsed + ' (ms)</p>');
+    });
+
+}
+for (i = 0; i < 20; i++) {
+    (function (i) {
+        setTimeout(doAjax, (i * 20000));
+    })(i);
+}
+</script>
+</head>
+</html>
+

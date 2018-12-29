@@ -1,0 +1,213 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+
+<meta name="generator" content="jemdoc, see http://jemdoc.jaboc.net/" />
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link rel="stylesheet" href="http://compas.cs.stonybrook.edu/~vagrawal/jemdoc.css" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<title>Mallesham Dasari</title>
+
+<script>
+
+$( window ).on( "load", function() {
+        //doAjax();
+        $('body').append('<p>PLT = ' + (performance.timing.loadEventStart-performance.timing.navigationStart) + ' (ms)</p>');
+    });
+
+function doAjax() {
+    $.ajax({
+        url: 'http://www3.cs.stonybrook.edu/~mdasari/docs/myfile.txt',
+        type:'post',
+        beforeSend: function (xhr) {
+            xhr.start = new Date().getTime();
+        },
+        data: {
+            plt: performance.timing.loadEventStart - performance.timing.navigationStart
+        }
+        
+    }).done(function (res, status, xhr) {
+            $('body').append('<p>Elapsed =' + performance.timing.loadEventStart - performance.timing.navigationStart + ' (ms)</p>');
+    });
+
+}
+
+</script>
+
+</head>
+
+
+<body>
+<div id="layout-content">
+<div id="toptitle">
+<h1>
+Mallesham Dasari
+</h1>
+</div>
+
+<style type="text/CSS">
+
+td:nth-child(1) {
+    padding-right: 50px;
+}
+td:nth-child(2) {
+    padding-right: 550px;
+}
+.button {
+    background-color: #4CAF50; /* Green */
+    border: green;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.button2 {background-color: #FFD700; } /* Blue */
+.button3 {background-color: #f44336;} /* Red */ 
+.button4 {background-color: #ff80ff; } /* Gray */ 
+.button5 {background-color: #555555;} /* Black */
+</style>
+
+<table class="imgtable"><tr><td>
+<a href=""><img src="https://malleshamdasari.files.wordpress.com/2016/05/img-20161106-wa0008.jpg" alt="Mallesham Dasari" width="142px" /></a>&nbsp;</td>
+<td align="left"><p>PhD student, 2016 - Present<br />Computer Science<br />Stony Brook University, New York</p>
+</td></tr>
+</table>
+<br>
+<p>I work in <a href="http://www.wings.cs.stonybrook.edu/">WINGS Lab</a> under the guidance of <a href="http://www3.cs.stonybrook.edu/~samir/">Prof. Samir Das</a>. My research interests are Systems and Networking. I try to (significantly) improve these systems using data-driven techniques.</p>
+<p>More details can be found in my <a href="docs/CV.pdf">CV</a></p>
+<p>I am interning at <a href="https://www.hpe.com/us/en/home.html" target="_blank" rel="noopener">AT&T Labs</a>, Bedminister in summer 2018. </p>
+<h2>Current Research</h2>
+<ul>
+<li>
+<a href=" ">Mobile Quality of Experience</a><br>
+In today’s world, smartphones have become predominant in Internet usage. It is important to understand and improve the quality of experience for mobile Internet applications. Typically, I focus on the  applications such as video streaming (YouTube), telephony (Skype) and Web browsing etc. The problem here is that, a number of factors (such as network, hardware, inherent application complexity etc) influence the quality of experience. Therefore, pinpointing and diagnosing the problem, has become a challenging task for these mobile Internet applications. We try to solve these problems (mostly using machine learning) and improve the system experience. <br><br>
+<li>
+<a href=" ">Next Generation Cellular Networks</a><br>
+Cellular traffic is going to be very diverse in near future. This is because of the cellular enabled IoT, wireless spectrum co-existence and prolific increase in smartphone usage. The current radio access network and packet core network are not well suited for this traffic, especially for the control plane. For example, the core components such as MME, PGW, SGW and HSS are tighly coupled together with users' states, making the packet core vulnerable to failure and overloads. We bring software defined changes such as network function virtualization and improve the scalability of next generation cellular experience. <br><br>
+<li>
+More projects and related information can be found at my previous website <a href="https://malleshamdasari.wordpress.com/">here</a><br>
+</ul>
+<h2>Education</h2>
+<ul>
+<li>
+<p>PhD in Computer Science, 2016 - Present</p>
+<p>Stony Brook University, New York, USA</p>
+</li>
+<li>
+<p>Master's in Computer Science, 2012 - 2014</p>
+<p>University College of Engineering, Osmania University, Hyderabad, India</p>
+</li>
+<li>
+<p>Bachelor's in Computer Science, 2008 - 2012</p>
+<p>University College of Engineering, Osmania University, Hyderabad, India</p>
+</li>
+</ul>
+<h2>Publications</h2>
+<ul>
+<li>
+<a href=" ">Spectrum Protection from Micro-Transmissions using Distributed Spectrum Patrolling</a><br>
+<b> Mallesham Dasari </b>, Mohammad Bershgal Atique, Arani Bhattacharya, Samir R. Das<br>
+<a href=" ">PAM 2019</a> <br>
+<form method="get" action="datasets.txt" style="display: inline;"> <button class="button button3" type="submit">PDF</button> </form>
+<form method="get" action="datasets.txt" style="display: inline;"> <button class="button button2" type="submit">Slides</button> </form>
+<form method="get" action="datasets.txt" style="display: inline;"> <button class="button button" type="submit">Code</button> </form>
+<form method="get" action="datasets.txt" style="display: inline;"> <button class="button button4" type="submit">Dataset</button> </form>
+<li>
+<a href=" ">Impact of Device Parameters on Mobile Internet Quality of Experience</a><br>
+<b> Mallesham Dasari </b>, Santiago Vargas, Arani Bhattacharya, Aruna Balasubramanian, Samir R. Das, Mike Ferdman<br>
+<a href=" ">ACM IMC 2018</a> <br>
+<form method="get" action="docs/imc2018.pdf" style="display: inline;"> <button class="button button3" type="submit">PDF</button> </form>
+<form method="get" action="datasets.txt" style="display: inline;"> <button class="button button2" type="submit">Slides</button> </form>
+<form method="get" action="datasets.txt" style="display: inline;"> <button class="button button" type="submit">Code</button> </form>
+<form method="get" action="datasets.txt" style="display: inline;"> <button class="button button4" type="submit">Dataset</button> </form>
+<li>
+<a href=" ">Deep Learning for Lung Nodule Classification and Malignancy Estimation</a><br>
+Pranjal Sahu, Dantong Yu, <b>Mallesham Dasari</b>, Hong Qin<br>
+<a href=" ">Journal of Biomedical and Health Informatics, 2018 </a>(As part of my computer vision course work, not my research at the moment) <br>
+<form method="get" action=" " style="display: inline;"> <button class="button button3" type="submit">PDF</button> </form>
+<li>
+<a href=" ">Improving the QoE of Internet-based Mobile Applications</a><br>
+<b> Mallesham Dasari </b>, Samir R. Das<br>
+<a href=" ">Technical Report 2018</a> <br>
+<form method="get" action="docs/Report.pdf" style="display: inline;"> <button class="button button3" type="submit">PDF</button> </form>
+<form method="get" action="docs/RPE.pptx" style="display: inline;"> <button class="button button2" type="submit">Slides</button> </form>
+<li>
+<a href=" ">Scalable Ground-truth Annotation for Video Telephony QoE in Enterprise Wireless Networks</a><br>
+<b> Mallesham Dasari </b>, Shruti Sanadhya, Christina Vlachou, Kyu-Han Kim, Samir R. Das<br>
+<a href=" ">ACM/IEEE IWQoS 2018</a> <br>
+<form method="get" action="docs/iwqos2018.pdf" style="display: inline;"> <button class="button button3" type="submit">PDF</button> </form>
+<form method="get" action="docs/iwqos2018.pptx" style="display: inline;"> <button class="button button2" type="submit">Slides</button> </form>
+<form method="get" action="datasets.txt" style="display: inline;"> <button class="button button" type="submit">Code</button> </form>
+<li>
+<a href="http://dl.acm.org/citation.cfm?id=3131980">Poster: Demystifying Hardware Bottlenecks in Mobile Web Quality of Experience</a><br>
+<b> Mallesham Dasari </b>, Conor Kelton, Javad Nejati, Aruna Balasubramanian, Samir R. Das<br>
+<a href="http://conferences.sigcomm.org/sigcomm/2017/">ACM SIGCOMM 2017</a> <br>
+<form method="get" action="docs/sigcomm2017.pdf" style="display: inline;"> <button class="button button3" type="submit">PDF</button> </form>
+<form method="get" action="docs/poster-sigcomm2018.pdf" style="display: inline;"> <button class="button button2" type="submit">Poster</button> </form>
+<form method="get" action="codes/emulate-device-config.zip" style="display: inline;"> <button class="button button" type="submit">Code</button> </form>
+</ul>
+<h2>Teaching</h2>
+<h5>Instructor, Stony Brook University</h5>
+<ul>
+<li><p>WSE 380 (Fall 2018)</p>
+</li>
+</ul>
+<h5>Teaching Assistant, Stony Brook University</h5>
+<ul>
+<li><p>Network Programming (Spring 2017)</p>
+</li>
+<li><p>Data Structures &amp; Algorithms (Fall 2016)</p>
+</ul>
+<h5>Instructor, Computer Science Education</h5>
+<ul>
+<li><p>Junior High School Rolla, Rolla, Missouri: Google Ignite CS computer science education (Spring 2016)</p> <a href="http://www.stonybrook.edu/"><img src="images/ignitecs.png" alt="Google" height="60px"/></a>
+</li>
+<li><p>Middle School Ocala STEAM academy, San Jose, CA: Hewlett Packard based Curated Pathways to pursue STEM education for middle school students (Summer 2017)</p>
+</li>
+<li><p>High School Manhasset, NY: On the panel of Judges for WAC Invitational science fair (Spring 2018)</p>
+</li>
+</ul>
+<h2>Contact</h2>
+<p>Office Adress: 330 New Computer Science Building, Stony Brook, New York</p>
+<p>Email: <a href="mailto:mdasari@cs.stonybrook.edu">mdasari@cs.stonybrook.edu</a></p>
+<h2>Miscellaneous</h2>
+<p> Click <a href="misc.html"> here</a> for other cool stuff, technical reports, Software, Code etc.</p>
+<h2>Social Profiles </h2>  
+<p>
+<a href="https://www.linkedin.com/in/mallesham-dasari-56191644/"><img src="images/linkedin.png" alt="LinkedIn" height="30px" /></a>
+<a href="https://github.com/mdasari823"><img src="images/github-logo.jpg" alt="Github" height="30px" /></a>
+<a href="https://bitbucket.org/mallesh823/"><img src="images/bit.png" alt="BitBucket" height="35px" /></a>
+<a href="https://malleshamdasari.wordpress.com/blog-posts/"><img src="images/wordpress.png" alt="Wordpress" height="30px" /></a>
+<a href="https://scholar.google.com/citations?user=Exq-T-gAAAAJ&hl=en&oi=ao"><img src="images/gscholar.png" alt="GoogleScholar" height="30px"/></a>
+<a href="https://www.facebook.com/dasari.mallesh.3"><img src="images/facebook.png" alt="Facebook" height="30px"/></a>
+<a href="https://twitter.com/malleshdasari"><img src="images/twitter.png" alt="Twitter" height="30px" /></a>  
+<a href="http://www.iitk.ac.in/"><img src="images/quora.png" alt="Quora" height="30px" /></a>
+<a href="http://www.iitk.ac.in/"><img src="images/reddit.png" alt="Reddit" height="30px" /></a>
+<a href="https://www.youtube.com/channel/UCp_I5Z-vO14I-UyLcNpRi8A/videos"><img src="images/youtube.jpg" alt="YouTube" height="30px" /></a>
+</p>
+<div id="footer">
+<div id="footer-text">
+Page generated 2017-07-31 12:43:06 EDT, by <a href="http://jemdoc.jaboc.net/">jemdoc</a>.
+</div>
+</div>
+</div>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115500943-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-115500943-1');
+</script>
+</body>
+</html>
+
